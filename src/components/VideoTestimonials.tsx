@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Star, ChevronRight } from "lucide-react";
 import { Testimonials } from "../data/boardingData";
+import { asset } from "../lib/asset";
 
 export default function VideoTestimonials() {
   const [activeId, setActiveId] = useState<string>("t-1");
@@ -41,10 +42,10 @@ export default function VideoTestimonials() {
                 className="h-full w-full object-cover"
                 controls
                 preload="metadata"
-                poster={activeTestimonial.thumbnail}
+                poster={asset(activeTestimonial.thumbnail)}
               >
                 <source
-                  src={activeTestimonial.videoSrc}
+                  src={asset(activeTestimonial.videoSrc)}
                   type="video/mp4"
                 />
                 Your browser does not support the video tag.

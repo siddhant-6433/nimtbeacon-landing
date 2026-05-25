@@ -1,4 +1,5 @@
 import React from "react";
+import { asset } from "../lib/asset";
 
 interface BulletItem {
   num: number;
@@ -68,8 +69,10 @@ export default function MoreThanHostel() {
   {/* Hostel Rooms Image */}
   <div className="relative overflow-hidden rounded-3xl shadow-lg group">
     <img
-      src="/hostel-room.webp"
+      src={asset("/hostel-room.webp")}
       alt="Hostel Rooms"
+      loading="lazy"
+      decoding="async"
       className="h-[280px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
     />
 
@@ -85,8 +88,10 @@ export default function MoreThanHostel() {
   {/* Students Bonding Image */}
   <div className="relative overflow-hidden rounded-3xl shadow-lg group">
     <img
-      src="/students-bonding.webp"
+      src={asset("/students-bonding.webp")}
       alt="Students Bonding"
+      loading="lazy"
+      decoding="async"
       className="h-[220px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
     />
 

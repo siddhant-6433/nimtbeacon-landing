@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Phone, ArrowRight, Menu, X } from "lucide-react";
+import { useLeadModal } from "./LeadModal";
+import { asset } from "../lib/asset";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { open: openLead } = useLeadModal();
 
   const navLinks = [
     { label: "Why Boarding", href: "#why-boarding" },
@@ -29,8 +32,12 @@ export default function Header() {
           <a href="#" className="flex items-center gap-3 group focus:outline-none">
          <div className="flex items-center">
   <img
-    src="/nimt-beacon-logo.webp"
+    src={asset("/nimt-beacon-logo.webp")}
     alt="NIMT Beacon School"
+    width="200"
+    height="56"
+    fetchPriority="high"
+    decoding="async"
     className="h-14 w-auto object-contain"
   />
 </div>
@@ -65,31 +72,23 @@ export default function Header() {
               <span>+91-95999 31443
 </span>
             </a>
-            <a
-              href="#admissions"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#admissions")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="rounded-full bg-white px-6 py-2.5 text-sm font-bold text-[#1344e6] hover:bg-blue-50 transition-all duration-200 shadow-sm flex items-center gap-1.5"
+            <button
+              onClick={() => openLead("admission")}
+              className="rounded-full bg-white px-6 py-2.5 text-sm font-bold text-[#1344e6] hover:bg-blue-50 transition-all duration-200 shadow-sm flex items-center gap-1.5 cursor-pointer"
             >
               <span>Apply Now</span>
               <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Icon */}
           <div className="md:hidden flex items-center gap-2">
-            <a
-              href="#admissions"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#admissions")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#1344e6] hover:bg-blue-50 transition-all duration-200"
+            <button
+              onClick={() => openLead("admission")}
+              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#1344e6] hover:bg-blue-50 transition-all duration-200 cursor-pointer"
             >
               Apply
-            </a>
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="rounded-lg p-2 hover:bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -124,17 +123,15 @@ export default function Header() {
               <span>Call +91-95999 31443
 </span>
             </a>
-            <a
-              href="#admissions"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#admissions")?.scrollIntoView({ behavior: "smooth" });
+            <button
+              onClick={() => {
+                openLead("admission");
                 setMobileMenuOpen(false);
               }}
-              className="block text-center rounded-lg bg-white py-3 text-base font-bold text-[#1344e6] hover:bg-blue-50"
+              className="block w-full text-center rounded-lg bg-white py-3 text-base font-bold text-[#1344e6] hover:bg-blue-50 cursor-pointer"
             >
               Apply Now
-            </a>
+            </button>
           </div>
         </div>
       )}

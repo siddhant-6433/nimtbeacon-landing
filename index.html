@@ -3,11 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <meta name="theme-color" content="#0041f5" />
+    <meta name="color-scheme" content="light" />
+
+    <title>NIMT Beacon School | Best CBSE Boarding School in Delhi NCR</title>
+    <meta
+      name="description"
+      content="NIMT Beacon School — a safe, disciplined and future-ready CBSE co-ed boarding school in Ghaziabad, Delhi NCR. IIT-JEE & NEET support, 24x7 security, personal mentorship."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" type="image/webp" href="/nimt-beacon-logo.webp" />
+    <link rel="apple-touch-icon" href="/nimt-beacon-logo.webp" />
+    <link rel="canonical" href="https://school.nimt.ac.in/landing/boarding/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NIMT Beacon School" />
+    <meta
+      property="og:title"
+      content="NIMT Beacon School | Best CBSE Boarding School in Delhi NCR"
+    />
+    <meta
+      property="og:description"
+      content="A safe, disciplined and future-ready CBSE co-ed boarding school in Ghaziabad, Delhi NCR."
+    />
+    <meta property="og:url" content="https://school.nimt.ac.in/landing/boarding/" />
+    <meta property="og:image" content="https://school.nimt.ac.in/landing/boarding/nimt01.webp" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="NIMT Beacon School | Best CBSE Boarding School in Delhi NCR"
+    />
+    <meta
+      name="twitter:description"
+      content="A safe, disciplined and future-ready CBSE co-ed boarding school in Ghaziabad, Delhi NCR."
+    />
+    <meta name="twitter:image" content="https://school.nimt.ac.in/landing/boarding/nimt01.webp" />
+
+    <!-- Preload critical above-the-fold assets -->
+    <link
+      rel="preload"
+      as="image"
+      href="/nimt-beacon-logo.webp"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/nimt01.webp"
+      fetchpriority="high"
+    />
+
+    <!-- Preconnect to Meta Pixel host so the script loads faster when triggered -->
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+    <link rel="dns-prefetch" href="https://www.facebook.com" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "511947283685367");
+      fbq("track", "PageView");
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- JSON-LD: Organization / School -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "School",
+        "name": "NIMT Beacon School",
+        "url": "https://school.nimt.ac.in/landing/boarding/",
+        "logo": "https://school.nimt.ac.in/landing/boarding/nimt-beacon-logo.webp",
+        "image": "https://school.nimt.ac.in/landing/boarding/nimt01.webp",
+        "telephone": "+91-95999-31443",
+        "email": "nsae@nimt.ac.in",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar",
+          "addressLocality": "Ghaziabad",
+          "addressRegion": "Uttar Pradesh",
+          "postalCode": "201002",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.facebook.com/nimtschoolgzb",
+          "https://www.instagram.com/nimtschool",
+          "https://www.youtube.com/@nimtschool"
+        ]
+      }
+    </script>
   </head>
   <body>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=511947283685367&ev=PageView&noscript=1" alt="" /></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

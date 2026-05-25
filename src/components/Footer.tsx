@@ -7,6 +7,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
+import { asset } from "../lib/asset";
 
 export default function Footer() {
   const handleScroll = (id: string) => {
@@ -29,9 +30,13 @@ export default function Footer() {
             {/* School Logo */}
             <div className="flex items-center">
               <img
-                src="/nimt-beacon-logo.webp"
+                src={asset("/nimt-beacon-logo.webp")}
                 alt="NIMT Beacon School"
-                className="h-20 md:h-24 w-auto object-contain"
+                width="240"
+                height="96"
+                loading="lazy"
+                decoding="async"
+                className="h-20 md:h-24 w-auto object-contain rounded-2xl"
               />
             </div>
 

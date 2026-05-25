@@ -1,4 +1,5 @@
 import React from "react";
+import { asset } from "../lib/asset";
 
 interface FacilityItem {
   image: string;
@@ -44,8 +45,10 @@ export default function CampusFacilities() {
             <div className="lg:col-span-6">
               <div className="group relative h-[500px] overflow-hidden rounded-[32px] shadow-xl">
                 <img
-                  src="/campus.webp"
+                  src={asset("/campus.webp")}
                   alt="Campus"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
 
@@ -77,8 +80,10 @@ export default function CampusFacilities() {
                     className="group relative overflow-hidden rounded-[28px] shadow-lg h-[238px]"
                   >
                     <img
-                      src={facility.image}
+                      src={asset(facility.image)}
                       alt={facility.name}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                     />
 
@@ -103,8 +108,10 @@ export default function CampusFacilities() {
                 className="group relative overflow-hidden rounded-[28px] shadow-lg h-[280px]"
               >
                 <img
-                  src={facility.image}
+                  src={asset(facility.image)}
                   alt={facility.name}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
 
@@ -158,8 +165,10 @@ export default function CampusFacilities() {
           <div className="lg:col-span-8">
             <div className="group relative overflow-hidden rounded-[32px] shadow-xl">
               <img
-                src="/campus1.webp"
+                src={asset("/campus1.webp")}
                 alt="Main Campus"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[500px] object-cover transition duration-700 group-hover:scale-105"
               />
 
@@ -181,8 +190,10 @@ export default function CampusFacilities() {
           <div className="lg:col-span-4">
             <div className="group relative overflow-hidden rounded-[32px] shadow-xl h-[500px]">
               <img
-                src="/sports.webp"
+                src={asset("/sports.webp")}
                 alt="Sports Complex"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
               />
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw, Subtitles, BookOpen } from "lucide-react";
+import { asset } from "../lib/asset";
 
 interface Subtitle {
   startTime: number; // in seconds
@@ -30,14 +31,14 @@ export default function InteractiveVideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(72); // preset to 72s match transcript
   const [volume, setVolume] = useState(0.8);
-  const [isMuted, setIsMuted] = useState(true); // mute on start for smoother auto-loop
+  const [isMuted, setIsMuted] = useState(true); // autoplay requires muted; click video to unmute
   const [showCaptions, setShowCaptions] = useState(true);
   const [currentCaption, setCurrentCaption] = useState("");
   const [activeSubtitleIdx, setActiveSubtitleIdx] = useState<number | null>(null);
   const [videoError, setVideoError] = useState(false);
 
-  const videoSrc = "/videos/nimt.mp4";
-  const thumbnailSrc = "nimt01.webp";
+  const videoSrc = asset("/videos/nimt.mp4");
+  const thumbnailSrc = asset("/nimt01.webp");
 
   // Scan current time against subtitle segments
   useEffect(() => {
@@ -68,6 +69,24 @@ export default function InteractiveVideoPlayer() {
         setVideoError(true);
       });
     }
+  };
+
+  // Click on the video surface unmutes audio (autoplay starts muted).
+  // After audio is enabled, subsequent clicks toggle play/pause.
+  const handleVideoClick = () => {
+    if (!videoRef.current) return;
+    if (isMuted) {
+      videoRef.current.muted = false;
+      setIsMuted(false);
+      if (videoRef.current.volume === 0) {
+        videoRef.current.volume = volume;
+      }
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+      return;
+    }
+    togglePlay();
   };
 
   const handleTimeUpdate = () => {
@@ -155,42 +174,33 @@ export default function InteractiveVideoPlayer() {
           ref={videoRef}
           src={videoSrc}
           poster={thumbnailSrc}
-          className="h-full w-full object-cover animate-fade-in"
+          preload="metadata"
+          autoPlay
+          className="h-full w-full object-cover animate-fade-in cursor-pointer"
           playsInline
           loop
           muted={isMuted}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onPlay={() => {
+            setHasStartedPlaying(true);
+            setIsPlaying(true);
+          }}
+          onPause={() => setIsPlaying(false)}
           onError={() => setVideoError(true)}
-          onClick={togglePlay}
+          onClick={handleVideoClick}
         />
 
-        {/* Real Thumbnail Image Overlay (displayed before video is started for super fast loading / preview) */}
-        {!hasStartedPlaying && (
-          <div className="absolute inset-0 z-10 select-none pointer-events-auto">
-            <img
-              src={thumbnailSrc}
-              alt="NIMT Boarding & Hostel Campus Life"
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-              referrerPolicy="no-referrer"
-            />
-            {/* Background cinematic vignette gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
-            
-            {/* Play trigger overlay */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-              <button
-                onClick={togglePlay}
-                className="flex h-16 w-16 items-center justify-center rounded-full bg-[#1344e6] text-white shadow-[0_8px_30px_rgb(19,68,230,0.5)] hover:scale-110 hover:bg-blue-700 active:scale-95 transition-all duration-300 cursor-pointer border-2 border-white/25"
-                aria-label="Play NIMT Hostel Video Tour"
-              >
-                <Play className="h-7 w-7 fill-current ml-1 text-white" />
-              </button>
-              <span className="mt-4 text-[11px] font-bold tracking-widest text-[#93c5fd] uppercase bg-slate-900/60 backdrop-blur-sm shadow border border-white/15 px-3.5 py-1.5 rounded-full">
-                Play Tour Video
-              </span>
-            </div>
-          </div>
+        {/* "Tap for sound" hint — only visible while autoplaying muted */}
+        {isMuted && hasStartedPlaying && (
+          <button
+            onClick={handleVideoClick}
+            className="absolute top-4 right-4 z-20 flex items-center gap-2 rounded-full bg-black/70 backdrop-blur-sm px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white border border-white/20 shadow-lg hover:bg-black/85 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer animate-fade-in"
+            aria-label="Unmute video"
+          >
+            <VolumeX className="h-4 w-4" />
+            <span>Tap for sound</span>
+          </button>
         )}
 
         {/* Cinematic Netflix-style Captions Overlay */}
