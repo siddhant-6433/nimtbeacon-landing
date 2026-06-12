@@ -1,4 +1,5 @@
 import React from "react";
+import { asset } from "../lib/asset";
 
 export default function HealthyBody() {
   const points = [
@@ -31,8 +32,10 @@ export default function HealthyBody() {
             {/* Dining Hall Image */}
             <div className="relative overflow-hidden rounded-3xl shadow-lg group">
               <img
-                src="/dining-hall.webp"
+                src={asset("/dining-hall.webp")}
                 alt="Dining Hall"
+                loading="lazy"
+                decoding="async"
                 className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
@@ -48,8 +51,10 @@ export default function HealthyBody() {
             {/* Balanced Meals Image */}
             <div className="relative overflow-hidden rounded-3xl shadow-lg group">
               <img
-                src="/balanced-meals.webp"
+                src={asset("/balanced-meals.webp")}
                 alt="Balanced Meals"
+                loading="lazy"
+                decoding="async"
                 className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 

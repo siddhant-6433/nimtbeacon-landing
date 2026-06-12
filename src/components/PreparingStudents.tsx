@@ -1,4 +1,5 @@
 import React from "react";
+import { asset } from "../lib/asset";
 
 interface PrepItem {
   image: string;
@@ -55,8 +56,10 @@ export default function PreparingStudents() {
             >
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={item.image}
+                  src={asset(item.image)}
                   alt={item.label}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
 

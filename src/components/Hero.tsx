@@ -1,19 +1,16 @@
 import React from "react";
 import { Check, ArrowDown, ExternalLink } from "lucide-react";
 import InteractiveVideoPlayer from "./InteractiveVideoPlayer";
+import { useLeadModal } from "./LeadModal";
 
 export default function Hero() {
+  const { open: openLead } = useLeadModal();
   const points = [
     "CBSE Affiliated",
     "Safe Campus & 24x7 Security",
     "IIT-JEE & NEET Support",
     "Personal Mentorship",
   ];
-
-  const handleApplyClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.querySelector("#admissions")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section className="relative overflow-hidden pt-0 pb-12 sm:pb-16 lg:pb-20" style={{ backgroundColor: "#0041f5" }}>
@@ -54,21 +51,18 @@ export default function Hero() {
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <a
-                href="#admissions"
-                onClick={handleApplyClick}
-                className="inline-flex items-center justify-center rounded-xl bg-white px-10 py-5 text-lg font-extrabold text-[#0041f5] shadow-lg hover:bg-blue-50 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
+              <button
+                onClick={() => openLead("admission")}
+                className="inline-flex items-center justify-center rounded-xl bg-white px-10 py-5 text-lg font-extrabold text-[#0041f5] shadow-lg hover:bg-blue-50 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
               >
                 Apply Now
-              </a>
-              <a
-                href="https://wa.me/919599931443?text=Hi%2C%20I%20would%20like%20to%20book%20a%20campus%20visit%20to%20NIMT%20Boarding%20School."
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border-2 border-white/30 bg-transparent px-10 py-5 text-lg font-extrabold text-white hover:border-white hover:bg-white/10 transition-all duration-200"
+              </button>
+              <button
+                onClick={() => openLead("schedule-visit")}
+                className="inline-flex items-center justify-center rounded-xl border-2 border-white/30 bg-transparent px-10 py-5 text-lg font-extrabold text-white hover:border-white hover:bg-white/10 transition-all duration-200 cursor-pointer"
               >
                 Book Campus Visit
-              </a>
+              </button>
             </div>
 
 

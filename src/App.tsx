@@ -15,32 +15,36 @@ import ResultsAchievements from "./components/ResultsAchievements";
 import FAQSection from "./components/FAQSection";
 import InquiryForm from "./components/InquiryForm";
 import CallToAction from "./components/CallToAction";
+import QuickActions from "./components/QuickActions";
 import Footer from "./components/Footer";
+import { LeadModalProvider } from "./components/LeadModal";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-blue-600/10 selection:text-blue-600">
-      <Header />
-      <main>
-        <Hero />
-        <WhyBoarding />
-        <WhyNIMT />
-        <MoreThanHostel />
-        <StudentTransformation />
-        <PreparingStudents />
-        <SchoolingPrep />
-        <SafetyPriority />
-        <HealthyBody />
-        <DayInLife />
-        <CampusFacilities />
-        <VideoTestimonials />
-        <ResultsAchievements />
-        <FAQSection />
-        <InquiryForm />
-        <CallToAction />
-      </main>
-      <Footer />
-    </div>
+    <LeadModalProvider>
+      <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-blue-600/10 selection:text-blue-600">
+        <Header />
+        <main>
+          <Hero />
+          <WhyBoarding />
+          <WhyNIMT />
+          <MoreThanHostel />
+          <StudentTransformation />
+          <PreparingStudents />
+          <SchoolingPrep />
+          <SafetyPriority />
+          <HealthyBody />
+          <DayInLife />
+          <CampusFacilities />
+          <QuickActions />
+          <VideoTestimonials />
+          <ResultsAchievements />
+          <FAQSection />
+          <InquiryForm />
+          <CallToAction />
+        </main>
+        <Footer />
+      </div>
+    </LeadModalProvider>
   );
 }
-
