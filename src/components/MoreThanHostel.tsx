@@ -72,6 +72,7 @@ export default function MoreThanHostel() {
       src={asset("/hostel-room.webp")}
       alt="Hostel Rooms"
       loading="lazy"
+      fetchpriority="low"
       decoding="async"
       className="h-[280px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
     />
@@ -91,6 +92,7 @@ export default function MoreThanHostel() {
       src={asset("/students-bonding.webp")}
       alt="Students Bonding"
       loading="lazy"
+      fetchpriority="low"
       decoding="async"
       className="h-[220px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
     />

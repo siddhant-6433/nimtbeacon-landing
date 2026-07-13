@@ -35,6 +35,7 @@ export default function HealthyBody() {
                 src={asset("/dining-hall.webp")}
                 alt="Dining Hall"
                 loading="lazy"
+                fetchpriority="low"
                 decoding="async"
                 className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -54,6 +55,7 @@ export default function HealthyBody() {
                 src={asset("/balanced-meals.webp")}
                 alt="Balanced Meals"
                 loading="lazy"
+                fetchpriority="low"
                 decoding="async"
                 className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />

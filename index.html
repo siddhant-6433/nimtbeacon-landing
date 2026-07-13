@@ -16,7 +16,7 @@
 
     <link rel="icon" type="image/webp" href="/nimt-beacon-logo.webp" />
     <link rel="apple-touch-icon" href="/nimt-beacon-logo.webp" />
-    <link rel="canonical" href="https://school.nimt.ac.in/landing/boarding/" />
+    <link rel="canonical" href="https://school.nimt.ac.in/landing/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -29,8 +29,8 @@
       property="og:description"
       content="A safe, disciplined and future-ready CBSE co-ed boarding school in Ghaziabad, Delhi NCR."
     />
-    <meta property="og:url" content="https://school.nimt.ac.in/landing/boarding/" />
-    <meta property="og:image" content="https://school.nimt.ac.in/landing/boarding/nimt01.webp" />
+    <meta property="og:url" content="https://school.nimt.ac.in/landing/" />
+    <meta property="og:image" content="https://school.nimt.ac.in/landing/nimt01.webp" />
     <meta property="og:locale" content="en_IN" />
 
     <!-- Twitter -->
@@ -43,28 +43,22 @@
       name="twitter:description"
       content="A safe, disciplined and future-ready CBSE co-ed boarding school in Ghaziabad, Delhi NCR."
     />
-    <meta name="twitter:image" content="https://school.nimt.ac.in/landing/boarding/nimt01.webp" />
+    <meta name="twitter:image" content="https://school.nimt.ac.in/landing/nimt01.webp" />
 
-    <!-- Preload critical above-the-fold assets -->
-    <link
-      rel="preload"
-      as="image"
-      href="/nimt-beacon-logo.webp"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/nimt01.webp"
-      fetchpriority="high"
-    />
+    <!-- Preload critical above-the-fold assets — %BASE_URL% is replaced by Vite at build time -->
+    <link rel="preload" as="image" href="%BASE_URL%nimt-beacon-logo.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="%BASE_URL%nimt01.webp" fetchpriority="high" />
 
-    <!-- Preconnect to Meta Pixel host so the script loads faster when triggered -->
+    <!-- Preconnect to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
     <link rel="dns-prefetch" href="https://www.facebook.com" />
+    <!-- Load Google Fonts early from HTML so the browser fetches it before CSS is parsed -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" />
 
-    <!-- Meta Pixel Code -->
-    <script>
+    <!-- Meta Pixel Code (non-render-blocking) -->
+    <script defer>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
@@ -99,9 +93,9 @@
         "@context": "https://schema.org",
         "@type": "School",
         "name": "NIMT Beacon School",
-        "url": "https://school.nimt.ac.in/landing/boarding/",
-        "logo": "https://school.nimt.ac.in/landing/boarding/nimt-beacon-logo.webp",
-        "image": "https://school.nimt.ac.in/landing/boarding/nimt01.webp",
+        "url": "https://school.nimt.ac.in/landing/",
+        "logo": "https://school.nimt.ac.in/landing/nimt-beacon-logo.webp",
+        "image": "https://school.nimt.ac.in/landing/nimt01.webp",
         "telephone": "+91-95999-31443",
         "email": "nsae@nimt.ac.in",
         "address": {

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw, Subtitles, BookOpen } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw, Subtitles } from "lucide-react";
 import { asset } from "../lib/asset";
 
 interface Subtitle {
@@ -28,10 +28,11 @@ export default function InteractiveVideoPlayer() {
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false); // only true after first user play
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(72); // preset to 72s match transcript
+  const [duration, setDuration] = useState(72);
   const [volume, setVolume] = useState(0.8);
-  const [isMuted, setIsMuted] = useState(true); // autoplay requires muted; click video to unmute
+  const [isMuted, setIsMuted] = useState(true);
   const [showCaptions, setShowCaptions] = useState(true);
   const [currentCaption, setCurrentCaption] = useState("");
   const [activeSubtitleIdx, setActiveSubtitleIdx] = useState<number | null>(null);
@@ -39,6 +40,9 @@ export default function InteractiveVideoPlayer() {
 
   const videoSrc = asset("/videos/nimt.mp4");
   const thumbnailSrc = asset("/nimt01.webp");
+
+  // No intersection-based preload — video src is set only after first user click.
+  // This prevents the browser from downloading ~9MB before the user asks for it.
 
   // Scan current time against subtitle segments
   useEffect(() => {
@@ -56,6 +60,12 @@ export default function InteractiveVideoPlayer() {
   }, [currentTime]);
 
   const togglePlay = () => {
+    if (!shouldLoad) {
+      // First click: load the video then play
+      setShouldLoad(true);
+      setHasStartedPlaying(true);
+      return; // video will autoplay once src is set via the onCanPlay handler below
+    }
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
@@ -65,15 +75,18 @@ export default function InteractiveVideoPlayer() {
       videoRef.current.play().then(() => {
         setIsPlaying(true);
       }).catch((err) => {
-        console.warn("Autoplay or play issue: ", err);
+        console.warn("Play issue: ", err);
         setVideoError(true);
       });
     }
   };
 
-  // Click on the video surface unmutes audio (autoplay starts muted).
-  // After audio is enabled, subsequent clicks toggle play/pause.
+  // Click on the video surface: first time loads+plays; after that unmutes; then toggles.
   const handleVideoClick = () => {
+    if (!shouldLoad) {
+      togglePlay();
+      return;
+    }
     if (!videoRef.current) return;
     if (isMuted) {
       videoRef.current.muted = false;
@@ -172,16 +185,20 @@ export default function InteractiveVideoPlayer() {
       >
         <video
           ref={videoRef}
-          src={videoSrc}
+          src={shouldLoad ? videoSrc : undefined}
           poster={thumbnailSrc}
-          preload="metadata"
-          autoPlay
+          preload="none"
           className="h-full w-full object-cover animate-fade-in cursor-pointer"
           playsInline
           loop
           muted={isMuted}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onCanPlay={() => {
+            if (shouldLoad && videoRef.current && !isPlaying) {
+              videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+            }
+          }}
           onPlay={() => {
             setHasStartedPlaying(true);
             setIsPlaying(true);
@@ -305,7 +322,21 @@ export default function InteractiveVideoPlayer() {
           </div>
         </div>
 
-        {/* Start Overlay Splash Play Button when video is launched but paused */}
+        {/* Initial play button — visible before video has ever played */}
+        {!hasStartedPlaying && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/30">
+            <button
+              onClick={togglePlay}
+              aria-label="Play campus tour video"
+              className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1344e6] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer border-2 border-white/30"
+            >
+              <Play className="h-9 w-9 fill-current ml-1 text-white" />
+            </button>
+            <span className="mt-4 text-sm font-semibold text-white/80 tracking-wide">Campus Tour</span>
+          </div>
+        )}
+
+        {/* Resume overlay — video loaded but paused */}
         {hasStartedPlaying && !isPlaying && (
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/40">
             <button

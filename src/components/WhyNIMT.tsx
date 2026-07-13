@@ -44,13 +44,14 @@ export default function CampusFacilities() {
             {/* Featured Campus Card */}
             <div className="lg:col-span-6">
               <div className="group relative h-[500px] overflow-hidden rounded-[32px] shadow-xl">
-                <img
-                  src={asset("/campus.webp")}
-                  alt="Campus"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
+                  <img
+                    src={asset("/campus.webp")}
+                    alt="Campus"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
@@ -83,6 +84,7 @@ export default function CampusFacilities() {
                       src={asset(facility.image)}
                       alt={facility.name}
                       loading="lazy"
+                      fetchpriority="low"
                       decoding="async"
                       className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                     />
@@ -107,15 +109,16 @@ export default function CampusFacilities() {
                 key={index}
                 className="group relative overflow-hidden rounded-[28px] shadow-lg h-[280px]"
               >
-                <img
-                  src={asset(facility.image)}
-                  alt={facility.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
+                  <img
+                    src={asset(facility.image)}
+                    alt={facility.name}
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
                 <div className="absolute bottom-5 left-5">
                   <h3 className="text-white text-xl font-bold">
@@ -164,13 +167,14 @@ export default function CampusFacilities() {
           {/* Main Campus */}
           <div className="lg:col-span-8">
             <div className="group relative overflow-hidden rounded-[32px] shadow-xl">
-              <img
-                src={asset("/campus1.webp")}
-                alt="Main Campus"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-[500px] object-cover transition duration-700 group-hover:scale-105"
-              />
+                <img
+                  src={asset("/campus1.webp")}
+                  alt="Main Campus"
+                  loading="lazy"
+                  fetchpriority="low"
+                  decoding="async"
+                  className="w-full h-[500px] object-cover transition duration-700 group-hover:scale-105"
+                />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
@@ -189,13 +193,14 @@ export default function CampusFacilities() {
           {/* Sports Complex */}
           <div className="lg:col-span-4">
             <div className="group relative overflow-hidden rounded-[32px] shadow-xl h-[500px]">
-              <img
-                src={asset("/sports.webp")}
-                alt="Sports Complex"
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              />
+                <img
+                  src={asset("/sports.webp")}
+                  alt="Sports Complex"
+                  loading="lazy"
+                  fetchpriority="low"
+                  decoding="async"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
