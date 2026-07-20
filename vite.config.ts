@@ -4,8 +4,9 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
-  // Set VITE_BASE=/landing/boarding/ for the school.nimt.ac.in sub-path
-  // deployment. Defaults to "/" so local dev and root deploys keep working.
+  // Set VITE_BASE=/landing/ when this app is published under
+  // https://school.nimt.ac.in/landing/. Defaults to "/" so local dev and
+  // root deploy previews keep working.
   const base = process.env.VITE_BASE || '/';
   return {
     base,

@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Star, ChevronRight } from "lucide-react";
 import { Testimonials } from "../data/boardingData";
 import { asset } from "../lib/asset";
 
 export default function VideoTestimonials() {
   const [activeId, setActiveId] = useState<string>("t-1");
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const activeTestimonial =
     Testimonials.find((t) => t.id === activeId) || Testimonials[0];
@@ -14,7 +32,7 @@ export default function VideoTestimonials() {
   };
 
   return (
-    <section className="bg-slate-50 py-20 border-t border-slate-100">
+    <section ref={sectionRef} className="bg-slate-50 py-20 border-t border-slate-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Title Block */}
@@ -41,13 +59,15 @@ export default function VideoTestimonials() {
                 key={activeTestimonial.id}
                 className="h-full w-full object-cover"
                 controls
-                preload="metadata"
+                preload={shouldLoad ? "metadata" : "none"}
                 poster={asset(activeTestimonial.thumbnail)}
               >
-                <source
-                  src={asset(activeTestimonial.videoSrc)}
-                  type="video/mp4"
-                />
+                {shouldLoad && (
+                  <source
+                    src={asset(activeTestimonial.videoSrc)}
+                    type="video/mp4"
+                  />
+                )}
                 Your browser does not support the video tag.
               </video>
 
