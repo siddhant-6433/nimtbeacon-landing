@@ -1,0 +1,6 @@
+{
+  "name": "NIMT Beacon School",
+  "description": "A comprehensive landing page for NIMT Beacon Boarding School with integrated boarding benefits, facilities, inquiry form, and academic structure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
